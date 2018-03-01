@@ -24,7 +24,7 @@ Version: **1.0.6**
 * Implement the [ClientInterface](WebSocket/Client/ClientInterface.php) in your applications user model or document.
 * Implement the [ClientProviderInterface](WebSocket/Client/ClientProviderInterface.php) in your applications user provider or managing repository.
 * Set the `provider` setting to the service id of your applications client provider implementation or leave blank for the default anonymous provider.
-* Implement the [ApplicationInterface](WebSocket/Server/ApplicationInterface.php) to listen on your own socket events ([Getting started](#getting-started)).
+* Implement the [ApplicationInterface](WebSocket/ApplicationInterface.php) to listen on your own socket events ([Getting started](#getting-started)).
 * Use the `{{ websocket_client(token, debug) }}` macro within your templates to enable the frontend websocket client.
 * Write your client side event handler scripts. See the [Javascript API](#javascript-api) section for more detail.
 * Open a terminal and start the server `app/console socket:server:start`. By default it will accept connection from *:8080 (see [Command Line Tool](#command-line-tool))
@@ -32,7 +32,7 @@ Version: **1.0.6**
 
 ### Getting started
 
-The [ApplicationInterface](WebSocket/Server/ApplicationInterface.php) acts only as an alias for symfony`s EventSubscriberInterface. Its used to detect websocket event subscribers explicitly.
+The [ApplicationInterface](WebSocket/ApplicationInterface.php) acts only as an alias for symfony`s EventSubscriberInterface. Its used to detect websocket event subscribers explicitly.
 
 Write your application as you would write a common event subscriber. The event handler methods will receive exactly one argument: a [ConnectionEvent](WebSocket/ConnectionEvent.php) instance, containing information about the socket connection and the payload (see [ConnectionInterface](WebSocket/Connection/ConnectionInterface.php) and [Payload](WebSocket/Payload.php) for more details).
 
@@ -42,7 +42,7 @@ Write your application as you would write a common event subscriber. The event h
 
 namespace Acme\Bundle\ChatBundle\WebSocket;
 
-use P2\Bundle\RatchetBundle\WebSocket\Server\ApplicationInterface;
+use P2\Bundle\RatchetBundle\WebSocket\ApplicationInterface;
 
 class Application implements ApplicationInterface
 {
@@ -201,7 +201,7 @@ namespace Acme\Bundle\ChatBundle\WebSocket;
 
 use P2\Bundle\RatchetBundle\WebSocket\ConnectionEvent;
 use P2\Bundle\RatchetBundle\WebSocket\Payload;
-use P2\Bundle\RatchetBundle\WebSocket\Server\ApplicationInterface;
+use P2\Bundle\RatchetBundle\WebSocket\ApplicationInterface;
 
 class ChatApplication implements ApplicationInterface
 {
